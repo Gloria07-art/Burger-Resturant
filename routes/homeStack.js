@@ -15,6 +15,7 @@ import Detail from "../components/Detail";
 import Contact from "../components/Contact";
 import Checkout from "../components/Checkout";
 import Address from "../components/Address";
+import ForgotPassword from "../components/ForgotPassword";
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,7 @@ const HomeStack = () => {
         }}
       >
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Detail" component={Detail} />

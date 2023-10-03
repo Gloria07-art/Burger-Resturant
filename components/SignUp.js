@@ -26,7 +26,7 @@ export default function SignUp() {
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         alert("Signed up");
-        navigation.navigate("SignUp")
+        navigation.navigate("Login")
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -43,11 +43,7 @@ export default function SignUp() {
         <Image style={styles.logo} source={require("../assets/boss.png")} />
         <Text style={styles.createText}>Create Account</Text>
       </View>
-      <Text style={styles.inputText}>Username</Text>
-      <View style={styles.section}>
-        <TextInput style={styles.inputStyle} />
-        <Image source={require("../assets/user.png")} style={styles.user} />
-      </View>
+      
       <Text style={styles.inputText}>Email ID</Text>
       <View style={styles.section}>
         <TextInput
@@ -66,13 +62,7 @@ export default function SignUp() {
         />
         <Image source={require("../assets/lock.png")} style={styles.lock} />
       </View>
-      <View style={styles.checkContainer}>
-        <Text>
-          {" "}
-          <CheckBox style={styles.checkbox} />I Read Agree With Terms &
-          Conditions.
-        </Text>
-      </View>
+
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.buttons} onPress={signUp}>
           {" "}
@@ -95,7 +85,7 @@ export default function SignUp() {
         </TouchableOpacity>
       </View>
       <Text style={styles.text}>
-        Already Have An Account? <TouchableOpacity>Login</TouchableOpacity>
+        Already Have An Account? <TouchableOpacity onPress={() => navigation.navigate('Login')}>Login</TouchableOpacity>
       </Text>
     </View>
   );
@@ -111,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginLeft: 60,
     padding: 20,
-    marginTop: 20,
+    marginTop: 5,
   },
 
   checkContainer: { marginTop: 20, paddingTop: 10 },

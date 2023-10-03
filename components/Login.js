@@ -24,7 +24,7 @@ export default function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         alert("Logged in!");
-        navigate("Home");
+        navigation.navigate("Address");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -64,7 +64,7 @@ export default function Login() {
           <Image source={require("../assets/lock.png")} style={styles.lock} />
         </View>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity  onPress={() => navigation.navigate('ForgotPassword')}>
         <Text> Forgot Password ?</Text>
       </TouchableOpacity>
       <View style={styles.buttonMain}>
@@ -87,8 +87,8 @@ export default function Login() {
       <Text>
         Don't Have An Account?{" "}
         <TouchableOpacity onPress={navigateSignUp}>
-          {" "}
-          Register Now{" "}
+          {" "} <Text style={styles.registerText}>
+          Register Now{" "}</Text>
         </TouchableOpacity>
       </Text>
     </View>
@@ -162,4 +162,5 @@ const styles = StyleSheet.create({
   user: { marginRight: 20 },
   mail: { marginRight: 20, height: 15, width: 15 },
   lock: { marginRight: 20 },
+  registerText:{color:"blue"}
 });
