@@ -8,10 +8,23 @@ import {
   CheckBox,
 } from "react-native";
 
+import { useState } from "react";
+
 import { useNavigation } from "@react-navigation/native";
 
 export default function Order() {
   const navigation = useNavigation();
+  const [cartItems, setCartItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const addToCart = (item) => {
+    const updatedCartItems = [...cartItems, item];
+    const updatedTotalPrice = totalPrice + item.price;
+    setCartItems(updatedCartItems);
+    setTotalPrice(updatedTotalPrice);
+  };
+  
+
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -20,11 +33,13 @@ export default function Order() {
           style={styles.logo}
           source={require("../assets/boss.png")}
         />{" "}
-        <Image
-          source={require("../assets/shopping-cart.png")}
-          style={styles.cart}
-        />{" "}
-        <Text>2 items</Text>
+        <TouchableOpacity onPress={() => addToCart(menu)}>
+          <Image
+            source={require("../assets/shopping-cart.png")}
+            style={styles.cart}
+          />{" "}
+        </TouchableOpacity>
+        <Text>{cartItems.length}</Text>
         <Image
           style={styles.menu}
           source={require("../assets/menus.png")}
@@ -71,7 +86,10 @@ export default function Order() {
           <Text>Total</Text> <Text>R120</Text>
         </View>
         <View style={styles.buttonMain}>
-          <TouchableOpacity style={styles.buttons} onPress={() => navigation.navigate('Checkout')}>
+          <TouchableOpacity
+            style={styles.buttons}
+            onPress={() => navigation.navigate("Checkout")}
+          >
             <Text style={styles.boldText}>
               Place <br></br> Order
             </Text>

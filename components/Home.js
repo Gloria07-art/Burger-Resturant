@@ -42,8 +42,9 @@ export default function Home() {
         <Image
           style={styles.logo}
           source={require("../assets/boss.png")}
-        />{" "}
+        />{" "} <TouchableOpacity>
         <Image style={styles.menu} source={require("../assets/menus.png")} />{" "}
+        </TouchableOpacity>
       </View>
       <View style={styles.section}>
         <TextInput style={styles.inputStyle} />
@@ -56,6 +57,7 @@ export default function Home() {
 
       <View style={styles.main}>
         <ScrollView>
+        <View style={styles.flexBox}>
           {menu.map((menu) => (
             <TouchableOpacity onPress={() => navigation.navigate("Detail")}>
               <View style={styles.imgMain}>
@@ -69,6 +71,7 @@ export default function Home() {
               </View>
             </TouchableOpacity>
           ))}
+          </View>
         </ScrollView>
 
         {/* {' '}
@@ -143,6 +146,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFDD",
     paddingBottom: 150,
   },
+  flexBox:{flexDirection: 'row',
+  flexWrap: 'wrap'},
 
   logo: {
     height: 50,
