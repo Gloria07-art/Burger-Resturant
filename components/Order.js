@@ -40,10 +40,11 @@ export default function Order() {
           />{" "}
         </TouchableOpacity>
         <Text>{cartItems.length}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Pop")}>
         <Image
           style={styles.menu}
           source={require("../assets/menus.png")}
-        />{" "}
+        />{" "}</TouchableOpacity>
       </View>
       <View style={styles.imgMain}>
         <Text style={styles.heading}>Checkout</Text>
@@ -55,12 +56,12 @@ export default function Order() {
         <Text style={styles.boldText}>ORDER SUMMARY</Text>
         <View style={styles.orderDefine}>
           <Text>
-            1 * Cheese Burger <br></br>
-            Cheddamalt cheese <br></br>with bedd{" "}
+            1 * Cheese Burger <br></br>  //Quantity update + menuTitle
+            Cheddamalt cheese <br></br>with bedd{" "} 
           </Text>
-          <Text>R120</Text>
+          <Text>R120</Text> ///sum update
         </View>
-        <TouchableOpacity style={styles.add}>
+        <TouchableOpacity onPress={() => navigation.navigate("Home")} style={styles.add}>
           <Text> + Add Item</Text>
         </TouchableOpacity>
       </View>
@@ -69,7 +70,7 @@ export default function Order() {
         <Text style={styles.boldText}>Order Amount</Text>{" "}
         <View style={styles.orderDefine}>
           {" "}
-          <Text>Subtotal</Text> <Text>R40</Text>
+          <Text>Subtotal</Text> <Text>R40</Text>  //sum of all costs
         </View>
         <View style={styles.orderDefine}>
           {" "}

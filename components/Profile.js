@@ -16,8 +16,9 @@ import {
 
     return (
       <View style={styles.container}>
+        <TouchableOpacity onPress={() => navigation.navigate("Pop")}>
         <Image style={styles.menu} source={require('../assets/menus.png')} />
-  
+        </TouchableOpacity>
         <Text style={styles.heading}>My Profile</Text>
   
         <Text style={styles.inTxt}>Username</Text>

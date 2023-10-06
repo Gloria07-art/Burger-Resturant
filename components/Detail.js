@@ -14,8 +14,9 @@ import { query, orderBy, limit } from "firebase/firestore";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../FirebaseAuth/config";
 
-export default function Detail() {
+export default function Detail( {  route })  {
   const [menu, setMenu] = useState("");
+  const { data } = route.params;
 
   const fetchMenu = async () => {
     try {
@@ -52,16 +53,15 @@ export default function Detail() {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../assets/grilled-gourmet-cheeseburger-with-fresh-vegetables-fries-generated-by-ai.jpg")}
+        source={data.imageUrl}
         resizeMode="cover"
         style={styles.image}
       ></ImageBackground>
 
-      <Text style={styles.heading}>{menu.menuTitle}</Text>
+      <Text style={styles.heading}>{data.menuTitle}</Text>
       <View style={styles.paragraph}>
         <Text>
-          A saucy chicken burger fillet topped with grilled onions and a garlic
-          buttered roll served with a single side of your choice.
+          {data.Description}
         </Text>
       </View>
       <View style={styles.main}>

@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../FirebaseAuth/config";
 
+
 export default function Home() {
   const navigation = useNavigation();
   const [menu, setMenu] = useState([]);
@@ -42,7 +43,7 @@ export default function Home() {
         <Image
           style={styles.logo}
           source={require("../assets/boss.png")}
-        />{" "} <TouchableOpacity>
+        />{" "} <TouchableOpacity onPress={() => navigation.navigate("Pop")}>
         <Image style={styles.menu} source={require("../assets/menus.png")} />{" "}
         </TouchableOpacity>
       </View>
@@ -59,14 +60,14 @@ export default function Home() {
         <ScrollView>
         <View style={styles.flexBox}>
           {menu.map((menu) => (
-            <TouchableOpacity onPress={() => navigation.navigate("Detail")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Detail", {data:menu})}>
               <View style={styles.imgMain}>
                 {" "}
                 <Text style={styles.inTxt}>{menu.menuTitle}</Text>
                 <Image
-                  source={require("../assets/beef.png")}
+                  source={menu.imageUrl}
                   style={styles.img}
-                />
+                /> 
                 <Text style={styles.inTxt}>{menu.price}</Text>
               </View>
             </TouchableOpacity>
