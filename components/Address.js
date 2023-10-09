@@ -22,6 +22,7 @@ export default function Address() {
       </View>
       <View style={styles.section}>
         <TextInput style={styles.inputStyle} />
+
         <Image source={require("../assets/pin.png")} style={styles.pin} />
       </View>
       <View style={styles.mainButtons}>

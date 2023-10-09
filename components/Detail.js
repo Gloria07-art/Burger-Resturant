@@ -8,15 +8,18 @@ import {
   CheckBox,
   ImageBackground,
 } from "react-native";
-import React, { useState,  useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { query, orderBy, limit } from "firebase/firestore";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../FirebaseAuth/config";
+import { doc, setDoc, collection, getDocs } from "firebase/firestore";
+import {auth , db} from "../FirebaseAuth/config";
+import { onAuthStateChanged } from "firebase/auth";
 
-export default function Detail( {  route })  {
+export default function Detail({ route }) {
   const [menu, setMenu] = useState("");
   const { data } = route.params;
+  const [cart, setCart] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(parseFloat(data.price));
 
   const fetchMenu = async () => {
     try {
@@ -36,19 +39,26 @@ export default function Detail( {  route })  {
     fetchMenu();
   }, []);
 
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   const increaseCount = () => {
     setCount(count + 1);
+    setTotalPrice(totalPrice + parseFloat(data.price));
+
+    
   };
 
   const decreaseCount = () => {
     setCount(count - 1);
+    setTotalPrice(totalPrice - parseFloat(data.price));
   };
 
   const navigation = useNavigation();
 
-  const [totalPrice, setTotalPrice] = useState(0);
+
+
+
+
 
   return (
     <View style={styles.container}>
@@ -60,9 +70,7 @@ export default function Detail( {  route })  {
 
       <Text style={styles.heading}>{data.menuTitle}</Text>
       <View style={styles.paragraph}>
-        <Text>
-          {data.Description}
-        </Text>
+        <Text>{data.Description}</Text>
       </View>
       <View style={styles.main}>
         <Text style={styles.heading}>Quantity</Text>
@@ -84,11 +92,21 @@ export default function Detail( {  route })  {
       <View style={styles.footer}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Order")}
+
+          onPress={() =>{
+            const cartItem ={
+              ...data,
+              quantity:count,
+            };
+            const updatedCart = [...cart, cartItem];
+            const updateTotalPrice = totalPrice + parseFloat(data.price) * count;
+            
+            navigation.navigate("Order", {cart: updatedCart, totalPrice: updateTotalPrice});
+          }}
         >
           {" "}
           <Text style={styles.buttonText}>ADD TO CART</Text>
-          <Text>R139.00</Text>
+          <Text>R{totalPrice}</Text>
         </TouchableOpacity>
       </View>
     </View>

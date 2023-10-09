@@ -23,21 +23,23 @@ const HomeStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Address"
         screenOptions={{
           headerShown: false,
         }}
       >
-         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Address" component={Address} />
+        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+
         <Stack.Screen name="Detail" component={Detail} />
         <Stack.Screen name="Order" component={Order} />
         <Stack.Screen name="Checkout" component={Checkout} />
         <Stack.Screen name="Pop" component={Pop} />
         <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="Address" component={Address} />
+
         <Stack.Screen name="Contact" component={Contact} />
       </Stack.Navigator>
     </NavigationContainer>

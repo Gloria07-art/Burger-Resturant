@@ -5,25 +5,40 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  CheckBox,
+  FlatList,
 } from "react-native";
 
 import { useState } from "react";
-
+import {auth, db} from "../FirebaseAuth/config";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Order() {
-  const navigation = useNavigation();
-  const [cartItems, setCartItems] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
+export default function Order({route}) {
+  const { cart, totalPrice} = route.params;
 
-  const addToCart = (item) => {
-    const updatedCartItems = [...cartItems, item];
-    const updatedTotalPrice = totalPrice + item.price;
-    setCartItems(updatedCartItems);
-    setTotalPrice(updatedTotalPrice);
-  };
-  
+  console.log(cart)
+// const [totalPrice, setTotalPrice] = useState(0);
+
+const fetchCartDetails = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "menu"));
+    const newData = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setMenu(newData);
+    console.log(newData);
+  } catch (error) {
+    alert("error");
+    console.error("Error fetching cart: ", error);
+  }
+};
+useEffect(() => {
+  fetchCartDetails ();
+}, []);
+
+
+const navigation = useNavigation();
+
 
   return (
     <View style={styles.container}>
@@ -39,7 +54,7 @@ export default function Order() {
             style={styles.cart}
           />{" "}
         </TouchableOpacity>
-        <Text>{cartItems.length}</Text>
+      
         <TouchableOpacity onPress={() => navigation.navigate("Pop")}>
         <Image
           style={styles.menu}
@@ -55,6 +70,18 @@ export default function Order() {
         </View>
         <Text style={styles.boldText}>ORDER SUMMARY</Text>
         <View style={styles.orderDefine}>
+{/* 
+          <FlatList
+          data= {cart}
+          keyExtractor={(data) => NavItem.id}
+          renderItem={({item}) => (
+            <View> <Text> {data.menuTitle}</Text>
+            <Text> R{data.price}</Text></View>
+          )}/> */}
+
+          
+          <Text>Total Price : R{totalPrice}</Text>
+
           <Text>
             1 * Cheese Burger <br></br>  //Quantity update + menuTitle
             Cheddamalt cheese <br></br>with bedd{" "} 

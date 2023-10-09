@@ -193,3 +193,4 @@ const styles = StyleSheet.create({
   main: { justifyContent: "space-between" },
   inTxt: { fontSize: 15, fontWeight: "bold", marginBottom: 10 },
 });
+
