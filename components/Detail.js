@@ -12,14 +12,52 @@ import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { query, orderBy, limit } from "firebase/firestore";
 import { doc, setDoc, collection, getDocs } from "firebase/firestore";
-import {auth , db} from "../FirebaseAuth/config";
+import { auth, db } from "../FirebaseAuth/config";
 import { onAuthStateChanged } from "firebase/auth";
 
 export default function Detail({ route }) {
   const [menu, setMenu] = useState("");
   const { data } = route.params;
-  const [cart, setCart] = useState([]);
+  const [cartItem, setCartItem] = useState([
+    {
+      cartItem:data
+    }
+  ]);
+
+ 
+
   const [totalPrice, setTotalPrice] = useState(parseFloat(data.price));
+  const [count, setCount] = useState(1);
+
+  const increaseCount = () => {
+    setCount(count + 1);
+    setCartItem([ ...cartItem,data])
+
+   
+    setTotalPrice(totalPrice + parseFloat(data.price));
+
+
+   
+    console.log(cartItem)
+    
+
+    
+  };
+
+ 
+
+  const decreaseCount = () => {
+    if (count > 1) {
+      setCount(count - 1);
+      setCartItem({
+        ...cartItem,
+        quantity: count - 1,
+      });
+      setTotalPrice(totalPrice - parseFloat(data.price));
+    }
+  };
+
+  const navigation = useNavigation();
 
   const fetchMenu = async () => {
     try {
@@ -39,27 +77,9 @@ export default function Detail({ route }) {
     fetchMenu();
   }, []);
 
-  const [count, setCount] = useState(1);
-
-  const increaseCount = () => {
-    setCount(count + 1);
-    setTotalPrice(totalPrice + parseFloat(data.price));
-
-    
-  };
-
-  const decreaseCount = () => {
-    setCount(count - 1);
-    setTotalPrice(totalPrice - parseFloat(data.price));
-  };
-
-  const navigation = useNavigation();
-
-
-
-
-
-
+ 
+ 
+ 
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -92,16 +112,9 @@ export default function Detail({ route }) {
       <View style={styles.footer}>
         <TouchableOpacity
           style={styles.button}
-
-          onPress={() =>{
-            const cartItem ={
-              ...data,
-              quantity:count,
-            };
-            const updatedCart = [...cart, cartItem];
-            const updateTotalPrice = totalPrice + parseFloat(data.price) * count;
-            
-            navigation.navigate("Order", {cart: updatedCart, totalPrice: updateTotalPrice});
+          onPress={() => {
+          
+            navigation.navigate("Order", { cart: cartItem, totalPrice, count });
           }}
         >
           {" "}

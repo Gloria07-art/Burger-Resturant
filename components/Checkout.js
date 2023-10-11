@@ -17,10 +17,22 @@ export default function Checkout() {
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <TouchableOpacity style={styles.box}>
-          <Text style={styles.boldTxt}>Checkout </Text>
+          <Text style={styles.boldTxt}>Order</Text>
         </TouchableOpacity>
         <View style={styles.checkItem}>
-          <Text>1 *Chicken Burger R120</Text>{" "}
+          <View>
+            <Text>Quantity</Text>
+            <Text>2</Text>{" "}
+          </View>
+          <View>
+            <Text>Item</Text>
+            <Text>Cheese Burger</Text>{" "}
+          </View>
+          <View>
+          <Text>Price</Text>
+            <Text>R120</Text>
+          </View>
+          
           <TouchableOpacity>
             <Image
               style={styles.logo}
@@ -29,6 +41,7 @@ export default function Checkout() {
           </TouchableOpacity>
         </View>{" "}
         <View style={styles.checkItem}>
+          <Text>2 *Beef Burger R120</Text>
           <Text>2 *Beef Burger R120</Text>{" "}
           <TouchableOpacity>
             <Image
@@ -41,7 +54,7 @@ export default function Checkout() {
 
       <View style={styles.bottomContainer}>
         {" "}
-        <Text style={styles.boldTxt}>Order</Text>
+        <Text style={styles.boldTxt}>Total</Text>
         <Text>R120</Text>
       </View>
     </View>
@@ -57,7 +70,7 @@ const styles = StyleSheet.create({
   },
 
   topContainer: {
-    width: 270,
+    width: 300,
     height: 250,
     backgroundColor: "white",
     justifyContent: "center",

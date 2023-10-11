@@ -9,35 +9,19 @@ import {
 } from "react-native";
 
 import { useState } from "react";
-import {auth, db} from "../FirebaseAuth/config";
+import { auth, db } from "../FirebaseAuth/config";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Order({route}) {
-  const { cart, totalPrice} = route.params;
+export default function Order({ route }) {
+  const { cart, totalPrice, count } = route.params;
+  console.log(totalPrice);
 
-  console.log(cart)
-// const [totalPrice, setTotalPrice] = useState(0);
+  console.log(cart);
 
-const fetchCartDetails = async () => {
-  try {
-    const querySnapshot = await getDocs(collection(db, "menu"));
-    const newData = querySnapshot.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    setMenu(newData);
-    console.log(newData);
-  } catch (error) {
-    alert("error");
-    console.error("Error fetching cart: ", error);
-  }
-};
-useEffect(() => {
-  fetchCartDetails ();
-}, []);
+  console.log(cart[0].menuTitle);
 
-
-const navigation = useNavigation();
+  console.log(count);
+  const navigation = useNavigation();
 
 
   return (
@@ -54,50 +38,51 @@ const navigation = useNavigation();
             style={styles.cart}
           />{" "}
         </TouchableOpacity>
-      
+
         <TouchableOpacity onPress={() => navigation.navigate("Pop")}>
-        <Image
-          style={styles.menu}
-          source={require("../assets/menus.png")}
-        />{" "}</TouchableOpacity>
-      </View>
-      <View style={styles.imgMain}>
-        <Text style={styles.heading}>Checkout</Text>
-        <Text>Delivery</Text>
-
-        <View style={styles.border}>
-          <Text>71 Jacobus Avenue</Text>
-        </View>
-        <Text style={styles.boldText}>ORDER SUMMARY</Text>
-        <View style={styles.orderDefine}>
-{/* 
-          <FlatList
-          data= {cart}
-          keyExtractor={(data) => NavItem.id}
-          renderItem={({item}) => (
-            <View> <Text> {data.menuTitle}</Text>
-            <Text> R{data.price}</Text></View>
-          )}/> */}
-
-          
-          <Text>Total Price : R{totalPrice}</Text>
-
-          <Text>
-            1 * Cheese Burger <br></br>  //Quantity update + menuTitle
-            Cheddamalt cheese <br></br>with bedd{" "} 
-          </Text>
-          <Text>R120</Text> ///sum update
-        </View>
-        <TouchableOpacity onPress={() => navigation.navigate("Home")} style={styles.add}>
-          <Text> + Add Item</Text>
+          <Image style={styles.menu} source={require("../assets/menus.png")} />{" "}
         </TouchableOpacity>
       </View>
       <View style={styles.imgMain}>
+        <View style={styles.buttonMain}>
+        <Text style={styles.heading}>My Cart Items</Text></View>
+
+        <View style={styles.orderDefine}>
+          <View>
+            <Text style={styles.boldText}>Quantity</Text>
+            <Text>{count}</Text>{" "}
+          </View>
+          <View>
+            <Text style={styles.boldText}>Item</Text>
+            <Text>{cart[1].menuTitle}</Text>{" "}
+          </View>
+          <View>
+            <Text style={styles.boldText}>Price</Text>
+            <Text> R{totalPrice}</Text>{" "}
+          </View>
+        </View>
+        <View style={styles.buttonMain}>
+          <TouchableOpacity
+            style={styles.buttons}
+            onPress={() => navigation.navigate("Checkout")}
+          >
+            <Text style={styles.boldText}>
+              Place <br></br> Order
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* <TouchableOpacity
+          onPress={() => navigation.navigate("Home")}
+          style={styles.add}
+        ></TouchableOpacity> */}
+      </View>
+      {/* <View style={styles.imgMain}>
         {" "}
         <Text style={styles.boldText}>Order Amount</Text>{" "}
         <View style={styles.orderDefine}>
           {" "}
-          <Text>Subtotal</Text> <Text>R40</Text>  //sum of all costs
+          <Text>Subtotal</Text> <Text>R40</Text> //sum of all costs
         </View>
         <View style={styles.orderDefine}>
           {" "}
@@ -122,8 +107,8 @@ const navigation = useNavigation();
               Place <br></br> Order
             </Text>
           </TouchableOpacity>
-        </View>
-      </View>{" "}
+        </View> */}
+      {/* </View>{" "} */}
     </View>
   );
 }
@@ -135,14 +120,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFDD",
   },
   imgMain: {
-    width: 270,
-    height: 300,
+    width: 300,
+    height: 500,
     backgroundColor: "white",
     justifyContent: "center",
     borderWidth: 1,
     borderRadius: 5,
-    marginTop: 40,
-    paddingLeft: 25,
+    marginTop: 0,
+    paddingTop: -50,
   },
   orderDefine: {
     flexDirection: "row",
@@ -162,7 +147,7 @@ const styles = StyleSheet.create({
   topContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 15,
+    padding: 0,
   },
   cart: { height: 34, width: 33, marginLeft: 70 },
 
@@ -180,9 +165,9 @@ const styles = StyleSheet.create({
   boldText: { fontWeight: "bold" },
   heading: {
     fontWeight: "bold",
-    marginLeft: 70,
+    // marginLeft: 70,
     marginBottom: 10,
-    marginTop: -40,
+    // marginTop: -40,
   },
   border: { borderWidth: 0.5, width: 200, borderRadius: 5, margin: 7 },
   buttonMain: { justifyContent: "center", alignItems: "center" },
