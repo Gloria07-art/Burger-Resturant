@@ -47,10 +47,7 @@ export default function Home() {
         <Image style={styles.menu} source={require("../assets/menus.png")} />{" "}
         </TouchableOpacity>
       </View>
-      <View style={styles.section}>
-        <TextInput style={styles.inputStyle} />
-        <Image source={require("../assets/pin.png")} style={styles.pin} />
-      </View>
+      
 
       <View style={styles.border}></View>
 
@@ -68,7 +65,7 @@ export default function Home() {
                   source={menu.imageUrl}
                   style={styles.img}
                 /> 
-                <Text style={styles.inTxt}>{menu.price}</Text>
+                <Text style={styles.inTxt}>R {menu.price}</Text>
               </View>
             </TouchableOpacity>
           ))}
@@ -145,7 +142,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 24,
     backgroundColor: "#FFFFDD",
-    paddingBottom: 150,
+    paddingBottom: 50,
   },
   flexBox:{flexDirection: 'row',
   flexWrap: 'wrap'},
@@ -167,8 +164,8 @@ const styles = StyleSheet.create({
   section: {
     flex: 1,
     borderWidth: 1,
-    width: 210,
-    height: 100,
+    width: 230,
+    height: 120,
     borderColor: "black",
     flexDirection: "row",
     justifyContent: "center",
@@ -177,9 +174,9 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     margin: 25,
   },
-  border: { width: 300, height: 12, borderWidth: 2, backgroundColor: "black" },
-  heading: { fontSize: 20, fontWeight: "Bolder", marginLeft: 80 },
-  img: { height: 89, width: 105, borderRadius: 5 },
+  border: { width: 300, height: 12, borderWidth: 2, backgroundColor: "black", marginTop: 20 },
+  heading: { fontSize: 20, fontWeight: "Bolder", marginLeft: 80, padding:5, marginBottom:20},
+  img: { height: 100, width: 105, borderRadius: 5 },
   imgMain: {
     width: 142,
     height: 163,

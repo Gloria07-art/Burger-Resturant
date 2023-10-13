@@ -16,6 +16,7 @@ import Contact from "../components/Contact";
 import Checkout from "../components/Checkout";
 import Address from "../components/Address";
 import ForgotPassword from "../components/ForgotPassword";
+import OrderConfirmed from "../components/OrderConfirm";
 
 const Stack = createStackNavigator();
 
@@ -28,22 +29,22 @@ const HomeStack = () => {
           headerShown: false,
         }}
       >
+       
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Detail" component={Detail} />
-        <Stack.Screen name="Address" component={Address} />
+        <Stack.Screen name="Login" component={Login} />
 
         
-        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
 
-        
         <Stack.Screen name="Order" component={Order} />
         <Stack.Screen name="Checkout" component={Checkout} />
         <Stack.Screen name="Pop" component={Pop} />
         <Stack.Screen name="Profile" component={Profile} />
 
         <Stack.Screen name="Contact" component={Contact} />
+        <Stack.Screen name="OrderConfirm" component={OrderConfirmed} />
       </Stack.Navigator>
     </NavigationContainer>
   );

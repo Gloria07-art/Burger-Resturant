@@ -24,14 +24,14 @@ export default function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         alert("Logged in!");
-        navigation.navigate("Address");
+        navigation.navigate("Home");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage)
+        console.log(errorMessage);
 
-        alert(errorMessage)
+        alert(errorMessage);
       });
   };
 
@@ -54,43 +54,34 @@ export default function Login() {
             value={email}
             onChangeText={setEmail}
           />
-          <Image source={require("../assets/email.png")} style={styles.mail} />
         </View>
         <Text style={styles.inputText}>Password</Text>
         <View style={styles.section}>
-          <TextInput style={styles.inputStyle}
-          value={password}
-          onChangeText={setPassword} />
-          <Image source={require("../assets/lock.png")} style={styles.lock} />
+          <TextInput
+            style={styles.inputStyle}
+            value={password}
+            onChangeText={setPassword}
+          />
         </View>
-      </View>
-      <TouchableOpacity  onPress={() => navigation.navigate('ForgotPassword')}>
+      </View >
+      <View style={styles.forgotPass}>
+      <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
         <Text> Forgot Password ?</Text>
-      </TouchableOpacity>
+      </TouchableOpacity></View>
       <View style={styles.buttonMain}>
         <TouchableOpacity style={styles.buttons} onPress={signIn}>
           {" "}
           <Text style={styles.buttonText}>Login </Text>
         </TouchableOpacity>
-        <Text>Or Login Using Social Media</Text>
       </View>
-      <View style={styles.socialMain}>
-        <Image
-          source={require("../assets/facebook.png")}
-          style={styles.socials}
-        />
-        <Image
-          source={require("../assets/twitter.png")}
-          style={styles.socials}
-        />
-      </View>
+      <View style={styles.forgotPass} >
       <Text>
         Don't Have An Account?{" "}
         <TouchableOpacity onPress={navigateSignUp}>
-          {" "} <Text style={styles.registerText}>
-          Register Now{" "}</Text>
+          {" "}
+          <Text style={styles.registerText}>Register Now </Text>
         </TouchableOpacity>
-      </Text>
+      </Text></View>
     </View>
   );
 }
@@ -100,7 +91,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 24,
     backgroundColor: "#FFFFDD",
-    paddingBottom: 180,
+    paddingBottom: 200,
   },
   arrow: { width: 20, height: 17 },
   arrowContainer: { flexDirection: "row" },
@@ -124,9 +115,19 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
+  forgotPass:{justifyContent:'center',
+alignContent:'center',
+alignItems:'center'},
+
   createSign: { fontWeight: "bold", alignItems: "center" },
 
   input: { marginTop: 30, padding: 5, marginBottom: 20 },
+  inputStyle: {
+    flex: 1,
+    width: 250,
+    height: 35,
+    padding: 10,
+  },
 
   section: {
     flex: 1,
@@ -162,5 +163,5 @@ const styles = StyleSheet.create({
   user: { marginRight: 20 },
   mail: { marginRight: 20, height: 15, width: 15 },
   lock: { marginRight: 20 },
-  registerText:{color:"blue"}
+  registerText: { color: "blue" },
 });

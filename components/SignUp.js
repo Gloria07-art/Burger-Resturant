@@ -20,20 +20,19 @@ export default function SignUp() {
 
   const [password, setPassword] = useState("");
 
-  console.log(email, password)
+  console.log(email, password);
 
   const signUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         alert("Signed up");
-        navigation.navigate("Login")
+        navigation.navigate("Login");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
 
-        console.log(errorMessage)
-
+        console.log(errorMessage);
       });
   };
 
@@ -43,7 +42,7 @@ export default function SignUp() {
         <Image style={styles.logo} source={require("../assets/boss.png")} />
         <Text style={styles.createText}>Create Account</Text>
       </View>
-      
+
       <Text style={styles.inputText}>Email ID</Text>
       <View style={styles.section}>
         <TextInput
@@ -69,24 +68,14 @@ export default function SignUp() {
           <Text style={styles.buttonText}> Register Now</Text>
         </TouchableOpacity>
       </View>
-      <Text style={styles.text}> Or Register Using Social Media</Text>
-      <View style={styles.socialMain}>
-        <TouchableOpacity>
-          <Image
-            style={styles.socials}
-            source={require("../assets/facebook.png")}
-          />{" "}
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image
-            style={styles.socials}
-            source={require("../assets/twitter.png")}
-          />{" "}
-        </TouchableOpacity>
+      <View >
+        <Text style={styles.text}>
+          Already Have An Account? 
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <Text style={styles.loginText}> Login </Text>
+          </TouchableOpacity>
+        </Text>
       </View>
-      <Text style={styles.text}>
-        Already Have An Account? <TouchableOpacity onPress={() => navigation.navigate('Login')}>Login</TouchableOpacity>
-      </Text>
     </View>
   );
 }
@@ -96,6 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 24,
     backgroundColor: "#FFFFDD",
+    paddingBottom: 200,
   },
   logoContainer: {
     justifyContent: "center",
@@ -160,9 +150,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     margin: 5,
   },
+  loginText: { color: "blue" },
   buttonText: { fontWeight: "bold" },
   text: { marginLeft: 50, padding: 10 },
   checkbox: { marginRight: 5 },
 
   socials: { height: 45, width: 45, margin: 20 },
+  textContainer: {
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+  },
 });

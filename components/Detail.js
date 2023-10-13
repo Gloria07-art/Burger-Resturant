@@ -131,10 +131,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 0,
     backgroundColor: "#FFFFDD",
-    paddingBottom: 60,
+    paddingBottom: 200,
   },
 
-  image: { width: 370, height: 150 },
+  image: { width: 370, height: 190 },
 
   main: {
     backgroundColor: "rgba(255, 255, 255, 0.70)",
@@ -142,6 +142,8 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     paddingBottom: 20,
+    borderWidth:2,
+    borderColor:'#faebd7'
   },
   logo: { width: 40, height: 40 },
   mainTwo: { flexDirection: "row", justifyContent: "space-between" },

@@ -14,6 +14,24 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function Order({ route }) {
   const { cart, totalPrice, count } = route.params;
+
+  const navigation = useNavigation();
+
+  // const handleDelete = (menuTitle) => {
+   
+  //   const updatedCart = cart.filter(item => item.menuTitle !== menuTitle);
+  //   let updatedTotalPrice = 0;
+  //   let updatedCount = 0;
+
+  //   updatedCart.forEach((item) => {
+  //     updatedTotalPrice += item.menuPrice * item.menuQuantity;
+  //     updatedCount += item.menuQuantity;
+  //   });
+
+  // }
+
+  
+
   console.log(totalPrice);
 
   console.log(cart);
@@ -21,7 +39,8 @@ export default function Order({ route }) {
   console.log(cart[0].menuTitle);
 
   console.log(count);
-  const navigation = useNavigation();
+ 
+
 
 
   return (
@@ -32,23 +51,20 @@ export default function Order({ route }) {
           style={styles.logo}
           source={require("../assets/boss.png")}
         />{" "}
-        <TouchableOpacity onPress={() => addToCart(menu)}>
-          <Image
-            source={require("../assets/shopping-cart.png")}
-            style={styles.cart}
-          />{" "}
-        </TouchableOpacity>
-
+       
         <TouchableOpacity onPress={() => navigation.navigate("Pop")}>
           <Image style={styles.menu} source={require("../assets/menus.png")} />{" "}
         </TouchableOpacity>
       </View>
-      <View style={styles.imgMain}>
+      <View style={styles.main}>
         <View style={styles.buttonMain}>
-        <Text style={styles.heading}>My Cart Items</Text></View>
+          <Text style={styles.heading}>My Cart Items</Text>
+        </View>
 
         <View style={styles.orderDefine}>
           <View>
+
+
             <Text style={styles.boldText}>Quantity</Text>
             <Text>{count}</Text>{" "}
           </View>
@@ -60,14 +76,26 @@ export default function Order({ route }) {
             <Text style={styles.boldText}>Price</Text>
             <Text> R{totalPrice}</Text>{" "}
           </View>
+          {/* <View>
+            <TouchableOpacity onPress={handleDelete}>
+              <Image
+                style={styles.deleteLogo}
+                source={require("../assets/delete.png")}
+              />
+            </TouchableOpacity>
+          </View> */}
         </View>
         <View style={styles.buttonMain}>
           <TouchableOpacity
             style={styles.buttons}
-            onPress={() => navigation.navigate("Checkout")}
+            onPress={() =>
+              navigation.navigate("Checkout"
+              // ,{ cart: cartItem, totalPrice, count }
+              )
+            }
           >
             <Text style={styles.boldText}>
-              Place <br></br> Order
+            ORDER
             </Text>
           </TouchableOpacity>
         </View>
@@ -118,7 +146,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 24,
     backgroundColor: "#FFFFDD",
+    paddingBottom: 200,
   },
+
+  main: {
+    width: 300,
+    height: 600,
+    padding: 20,
+    backgroundColor: "white",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingTop: -280,
+    marginTop: 20,
+  },
+
   imgMain: {
     width: 300,
     height: 500,
@@ -126,13 +168,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 1,
     borderRadius: 5,
-    marginTop: 0,
-    paddingTop: -50,
+    marginTop: 20,
+    paddingTop: -30,
   },
   orderDefine: {
     flexDirection: "row",
     justifyContent: "space-between",
-    margin: 5,
+    marginTop: -140,
+    // margin: 5,
   },
   logo: {
     height: 50,
@@ -167,10 +210,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     // marginLeft: 70,
     marginBottom: 10,
-    // marginTop: -40,
+    marginTop: -380,
+    fontSize: 20,
   },
   border: { borderWidth: 0.5, width: 200, borderRadius: 5, margin: 7 },
-  buttonMain: { justifyContent: "center", alignItems: "center" },
+  buttonMain: {
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
+  },
 
   add: { marginTop: 50 },
+  deleteLogo: { width: 20, height: 20 },
 });

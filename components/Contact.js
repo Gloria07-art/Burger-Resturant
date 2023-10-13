@@ -25,7 +25,7 @@ export default function Contact() {
         details below.
       </Text>
       <Text style={styles.inTxt}>Email</Text>
-      <Text style={styles.sub}>info@burgers.co.za</Text>
+      <Text style={styles.sub}>info@bossburgers.co.za</Text>
       <Text style={styles.inTxt}>Phone</Text>
       <Text style={styles.sub}>
         086 765 0865 <br></br>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 24,
     backgroundColor: "#FFFFDD",
-    paddingBottom: 200,
+    paddingBottom: 470,
   },
 
   menu: {
