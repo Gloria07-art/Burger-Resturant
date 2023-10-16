@@ -43,7 +43,8 @@ export default function Home() {
         <Image
           style={styles.logo}
           source={require("../assets/boss.png")}
-        />{" "} <TouchableOpacity onPress={() => navigation.navigate("Pop")}>
+        />{" "} 
+        <TouchableOpacity onPress={() => navigation.navigate("Pop")}>
         <Image style={styles.menu} source={require("../assets/menus.png")} />{" "}
         </TouchableOpacity>
       </View>

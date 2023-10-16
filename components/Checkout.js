@@ -7,11 +7,41 @@ import {
   TouchableOpacity,
   CheckBox,
 } from "react-native";
-
+import { db } from "../FirebaseAuth/config";
+import { collection, addDoc } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 
 export default function Checkout({ route }) {
   const navigation = useNavigation();
+  const [name, setName] = useState('');
+  const [phone, setPhone ] = useState('');
+  const [address, setAddress] = useState('');
+
+  const checkOut = async () => {
+    try {
+      const authUser = getAuth().currentUser;
+      if (authUser) {
+        const docRef = await addDoc(collection(db, "Cart" + authUser.uid), {
+          owner_uid: authUser.uid,
+          Name: cart.Name,
+          Price: total,
+          Amount: count,
+          Buyer: name,
+          Number: phone,
+          Address: address,
+        });
+        console.log("Document written with ID: ", docRef.id);
+        navigation.navigate("OrderConfirm");
+      } else {
+        console.error("User not authenticated");
+      }
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
+
+
   // const { cart, totalPrice, count } = route.params;
 
   // const handleDelete = (menuTitle) => {
@@ -49,25 +79,25 @@ export default function Checkout({ route }) {
 
         <View style={styles.checkItem}>
         <View>
-            <Text>Date</Text>
-            <Text>20/10/2023</Text>{" "}
+            <Text>Name</Text>
+            <TextInput placeholder="Enter name"
+            value={name}
+            onChangeText={(text) => setName(text)}></TextInput>{" "}
           </View>
+          {/* onChangeText={(text) => setProfile(text) */}
         <View>
-            <Text>Order Number</Text>
-            <Text>Bb87W3456</Text>{" "}
+            <Text>Phone Number</Text>
+            <TextInput placeholder="Enter name"
+            value={phone}
+            onChangeText={(text) => setPhone(text)}></TextInput>{" "}
           </View>
           <View>
-            <Text>Quantity</Text>
-            <Text>2</Text>{" "}
+            <Text>Address</Text>
+            <Text placeholder="Enter Your name"
+            value={address}
+            onChangeText={(text) => setAddress(text)}></Text>{" "}
           </View>
-          <View>
-            <Text>Item</Text>
-            <Text>Cheese Burger</Text>{" "}
-          </View>
-          <View>
-            <Text>Price</Text>
-            <Text>R120</Text>
-          </View>
+          
 
           <TouchableOpacity>
             <Image
@@ -84,7 +114,7 @@ export default function Checkout({ route }) {
 
       <View style={styles.bottomContainer}>
         {" "}
-        <TouchableOpacity style={styles.box} onPress={() => navigation.navigate("OrderConfirm")}>
+        <TouchableOpacity style={styles.box} onPress={Checkout}>
           <Text style={styles.boldTxt}> CONFIRM ORDER</Text>
         </TouchableOpacity>
       </View>

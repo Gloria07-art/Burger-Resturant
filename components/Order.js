@@ -5,20 +5,25 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  FlatList,
+  FlatList, Alert
 } from "react-native";
 
 import { useState } from "react";
 import { auth, db } from "../FirebaseAuth/config";
 import { useNavigation } from "@react-navigation/native";
 
+
 export default function Order({ route }) {
   const { cart, totalPrice, count } = route.params;
 
   const navigation = useNavigation();
+  const d = new Date();
+  let x = Math.floor((Math.random() * 10000) + 100);
+  
+
 
   // const handleDelete = (menuTitle) => {
-   
+
   //   const updatedCart = cart.filter(item => item.menuTitle !== menuTitle);
   //   let updatedTotalPrice = 0;
   //   let updatedCount = 0;
@@ -30,8 +35,6 @@ export default function Order({ route }) {
 
   // }
 
-  
-
   console.log(totalPrice);
 
   console.log(cart);
@@ -39,10 +42,15 @@ export default function Order({ route }) {
   console.log(cart[0].menuTitle);
 
   console.log(count);
- 
 
-
-
+  
+  
+  
+  
+  
+  
+  
+  
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -50,7 +58,8 @@ export default function Order({ route }) {
         <Image
           style={styles.logo}
           source={require("../assets/boss.png")}
-        />{" "}
+    />{" "}
+       
        
         <TouchableOpacity onPress={() => navigation.navigate("Pop")}>
           <Image style={styles.menu} source={require("../assets/menus.png")} />{" "}
@@ -58,45 +67,76 @@ export default function Order({ route }) {
       </View>
       <View style={styles.main}>
         <View style={styles.buttonMain}>
-          <Text style={styles.heading}>My Cart Items</Text>
+          <Text style={styles.heading}>My Items</Text>
+        </View>
+        <View>
+          {" "}
+          <Text style={styles.boldText}>Date</Text>
+          <Text>{d.getDate()}:{d.getMonth()}:{d.getFullYear()}</Text>
+        </View>
+        <View>
+          {" "}
+          <Text style={styles.boldText}>Order Number</Text>
+          <Text>BB{x}</Text>
         </View>
 
+        <View>
+          {" "}
+          <Text style={styles.boldText}>User Credentials</Text>
+          <Text>Piggy White{x}</Text>
+        </View>
         <View style={styles.orderDefine}>
           <View>
-
-
             <Text style={styles.boldText}>Quantity</Text>
             <Text>{count}</Text>{" "}
           </View>
           <View>
-            <Text style={styles.boldText}>Item</Text>
+            <Text style={styles.boldText}>Burger Item</Text>
             <Text>{cart[1].menuTitle}</Text>{" "}
           </View>
           <View>
             <Text style={styles.boldText}>Price</Text>
             <Text> R{totalPrice}</Text>{" "}
           </View>
-          {/* <View>
-            <TouchableOpacity onPress={handleDelete}>
+          
+
+
+           {/* <View>
+            <TouchableOpacity>
               <Image
                 style={styles.deleteLogo}
                 source={require("../assets/delete.png")}
               />
             </TouchableOpacity>
-          </View> */}
+          </View>  */}
         </View>
+
+
+        <View style={styles.orderDefine}>
+          {" "}
+          <Text style={styles.boldText}>Total</Text>
+          <Text>R{totalPrice}</Text>
+        </View>
+
+        <View style={styles.buttonMain}>
+            <TouchableOpacity>
+              <Image
+                style={styles.deleteLogo}
+                source={require("../assets/delete.png")}
+              />
+            </TouchableOpacity></View>
+
         <View style={styles.buttonMain}>
           <TouchableOpacity
             style={styles.buttons}
             onPress={() =>
-              navigation.navigate("Checkout"
-              // ,{ cart: cartItem, totalPrice, count }
+              navigation.navigate(
+                "OrderConfirm"
+                // ,{ cart: cartItem, totalPrice, count }
               )
             }
           >
-            <Text style={styles.boldText}>
-            ORDER
-            </Text>
+            <Text style={styles.boldText}>ORDER</Text>
           </TouchableOpacity>
         </View>
 
@@ -157,7 +197,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 1,
     borderRadius: 5,
-    paddingTop: -280,
+    // paddingTop: -280,
     marginTop: 20,
   },
 
@@ -174,7 +214,7 @@ const styles = StyleSheet.create({
   orderDefine: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: -140,
+    // marginTop: -140,
     // margin: 5,
   },
   logo: {
@@ -210,7 +250,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     // marginLeft: 70,
     marginBottom: 10,
-    marginTop: -380,
+    // marginTop: -380,
     fontSize: 20,
   },
   border: { borderWidth: 0.5, width: 200, borderRadius: 5, margin: 7 },

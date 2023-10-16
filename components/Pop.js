@@ -22,12 +22,10 @@ export default function Pop() {
               Home
             </TouchableOpacity>{" "}
             <br></br>
-            <TouchableOpacity onPress={() => navigation.navigate("Order")}>
-              Orders{" "}
-            </TouchableOpacity>
-            <br></br>
+           
             <TouchableOpacity onPress={() => navigation.navigate("Profile")}>Profile</TouchableOpacity>
             <br></br>
+            
             <TouchableOpacity onPress={() => navigation.navigate("Contact")}>Contact</TouchableOpacity>
           </Text>
         </View>
